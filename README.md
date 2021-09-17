@@ -1,18 +1,24 @@
 # Open Source EdTech Student-Teacher Project
+<img height="36px" src="https://forthebadge.com/images/badges/made-with-python.svg">&nbsp;<img height = "36px" src = "https://forthebadge.com/images/badges/open-source.svg">&nbsp;<img height="26px" src="https://img.shields.io/badge/For-Teachers%20And%20Students-red.svg">
+
 <p>
-    This project exists to make it easier for students and teachers to connect.
+    ConnectLearn is an easy to use and deploy Open-Source Project meant to make it easier for the right students to find the right teachers online.
 </p>
+
+### Deploy
+
+- <code>git clone https://github.com/0x0elliot/connectlearn/</code>
+- <code>cd connectlearn/src </code>
+- Set up <code>src/.env</code> to add your SMTP email and Password.
+- <code>sudo docker-compose up</code>
+
+If you don't have docker and docker-compose installed, Try <a href = "https://docs.docker.com/engine/install/ubuntu/">Docker Installation</a> and <code>sudo apt install docker-compose</code>
+
 
 ![image](https://user-images.githubusercontent.com/60684641/132923014-5a2ca4a1-e99f-46bd-b8cd-07adaa123653.png)
 
-### How to deploy (For now)
-
-- <code>python3 connectlearn/mainwebapp/create_db.test.py</code> This will create the database file.
-- Close create_db.test.py and then run <code>python3 connectlearn/mainwebapp/app.py</code> (I will write a Dockerfile and automate this as soon as possible!)
-
 ### Features:
 
-- <b>Change .env file in mainwebapp folder to include your SMTP server details.</b>
 - <b>Login/Register/Sign Out functionality</b>
 ![image](https://user-images.githubusercontent.com/60684641/132923245-ad4601c9-af0c-4ae4-bad5-e1f1e43339b9.png)
 
