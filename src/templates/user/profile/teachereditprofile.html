@@ -1,0 +1,146 @@
+<html>
+
+<head>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "height: 7vh;">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/user/profile/edit">Edit Profile</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user/logout">Sign Out</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <div class = "image-container">
+                {% if current_user.profile_picture_url == None %} 
+                    <a href = "/user/setup/upload"><img src = "{{ avatars.gravatar('.') }}" class = "pfp"></a>
+                {% else %} 
+                    <a href = "/user/setup/upload"><img src = "/user/avatars/{{ current_user.avatar }}" class = "pfp"></a>
+                {% endif %}
+                </div>
+                <span class="font-weight-bold">{{ username }}</span><span class="text-black-50">{{ email }}</span>
+
+                {% if form.errors|length != 0 %}
+                    {% for i in form.errors %}
+                        <center><span class="text-black-50"><p style = "color: red;">*{{i.capitalize()}} : {{ form.errors[i][0] }}</p></span></center>
+                    {% endfor %}
+                {% endif %}
+                </div>
+        </div>
+        
+        <div class="col-md-5 border-right">
+            <form action="/user/profile/edit" method="POST" role="form">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Price Per Hour [$/hr]:</label><input type="number" class="form-control" placeholder="" value="{{ price_per_hour }}" name = "price_per_hour" /></div>
+                    <div class="col-md-6"><label class="labels">Phone (*Optional, Please include country code as well)</label><input type="number" id = "phone" class="form-control" value="{{ phone }}" placeholder="Private Only" name = "phone" /></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-12"><label class="labels">Thumbnail Description: [Max 300 Characters]</label><textarea type="text" class="form-control" placeholder="" name = "thumbnaildescription" style="height:15vh" >{{ thumbnaildescription }}</textarea></div>
+                    <div class="col-md-12"><label class="labels">Long Description: [Max 5000 Characters]</label><textarea type="text" class="form-control" placeholder="" name = "description" style="height:15vh">{{ description }}</textarea></div>
+                </div>
+                <div class="row mt-3">
+                    
+                    <div class="col-md-6"><label class="labels">Language</label>
+                        <select class="mdb-select md-form" name = "language" style = "height: 3vh;">
+                            <option value="english" {{ english_selected }}>English</option>
+                            <option value="korean" {{ korean_selected }}>Korean</option>
+                            <option value="japanese" {{ japanese_selected }}>Japanese</option>
+                            <option value="mandarin" {{ mandarin_selected }}>Mandarin</option>
+                            <option value="cantonese" {{ cantonese_selected }}>Cantonese</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><a href = "/user/profile/{{current_user.id}}" style = "color: black; text-decoration: none;"><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;View Profile</span></a></div><br>
+                <div class="col-md-12"><label class="labels">Years of experience in teaching [Insert 0 for less than 1 Years of Experience]:</label><input type="number" class="form-control" value = "{{ years }}" name = "years"></div> <br>
+            </div>
+        {{form.hidden_tag()}}
+    </form>
+    </div>
+</div>
+</div>
+</div>
+</body>
+<style>
+body {
+    background:white;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8;
+}
+
+.profile-button {
+    background: #343A40;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: white;
+    color: black;
+    border-color: black;
+    border: thick;
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+
+.pfp:hover {
+    opacity: .5;
+    transition: 0.2s;
+}
+</style>
+</html>

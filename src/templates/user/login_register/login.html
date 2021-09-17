@@ -1,0 +1,73 @@
+<html>
+<head>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "height: 7vh;">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/user/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/register">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5 max-vw-30 container-sm">
+  <div class="card p-3 bg-white">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+    <div class="card-header"><b>Login</b></div>
+    <div class="card-body">
+      <form action = "/user/login" method = "post">
+        <div class="form-group row">
+            <label for="email_address" class="col-md-4 col-form-label text-md-right">Username</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="username" required autofocus>
+            </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+          <div class="col-md-6">
+              <input type="password" id="password" class="form-control" name="password" required>
+          </div>
+        </div>
+        <div class="col-md-6 offset-md-4">
+          {{ form.hidden_tag() }}
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">
+                Submit
+                </button>
+            </div>
+        {% if message != "Fill the form to login" %}
+            <div class="d-flex justify-content-center"><p style = "color: red;">*{{message}}</p></div>
+        {% endif %}
+            
+        <!--
+        <a href="/user/register" class="btn btn-link">
+            Forgot Your Password?
+        </a>
+        -->
+      </div>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+</body>
+
+</html>

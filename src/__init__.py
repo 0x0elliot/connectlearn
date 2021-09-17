@@ -1,0 +1,1 @@
+from src.wsgi import app

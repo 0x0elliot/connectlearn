@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "height: 7vh;">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/user/profile/edit">Edit Profile</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user/logout">Sign Out</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <span class="font-weight-bold">Student Profile</span><br><span class="text-black-50">{{ email }}</span><span class="font-weight-bold">{{ username }}</span></div>
+        </div>
+        
+        <div class="col-md-5 border-right">
+            <form action="/user/profile/edit" method="POST" role="form">
+            <div class="p-3 py-5">
+                <div class=" mb-3">
+                    <h4 class="text-left">Profile Settings: </h4><h6>This information would be used when you contact a teacher.</h6>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Name:</label><input type="text" class="form-control" placeholder="" value="{{ name }}" name = "name" /></div>
+                    <div class="col-md-6"><label class="labels">Phone (*Optional, Please include country code as well)</label><input type="number" id = "phone" class="form-control" value="{{ phone }}" placeholder="Private Only" name = "phone" /></div>
+                </div>
+
+                <div class="row mt-3">
+                    
+                    <div class="col-md-6"><label class="labels">Language</label>
+                        <select class="mdb-select md-form" name = "language" style = "height: 3vh;">
+                            <option value="english" {{ english_selected }}>English</option>
+                            <option value="korean" {{ korean_selected }}>Korean</option>
+                            <option value="japanese" {{ japanese_selected }}>Japanese</option>
+                            <option value="mandarin" {{ mandarin_selected }}>Mandarin</option>
+                            <option value="cantonese" {{ cantonese_selected }}>Cantonese</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+            </div>
+        </div>
+        {{form.hidden_tag()}}
+    </form>
+    </div>
+
+    {% if form.errors|length != 0 %}
+    {% for i in form.errors %}
+        <center><span class="text-black-50"><p style = "color: red;">*{{i.capitalize()}} : {{ form.errors[i][0] }}</p></span></center>
+    {% endfor %}
+    {% endif %}
+</div>
+</div>
+</div>
+<style>
+body {
+    background: white;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: black;
+    color: white;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: whitesmoke;
+    color: black;
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: wheat;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+
+.pfp:hover {
+    opacity: .5;
+    transition: 0.2s;
+}
+</style>
+</html>

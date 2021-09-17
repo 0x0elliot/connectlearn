@@ -1,0 +1,95 @@
+<html>
+<head>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "height: 7vh;">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/profile/edit">Edit Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/logout">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<div class="container align-items-center">
+
+	<div class="row">
+		<form role="form" id="contact-form" class="contact-form" method = "post">
+                    <div class="row">
+                		<div class="col-md-6">
+                  		<div class="form-group">
+                            {{form.hidden_tag()}}
+                  		</div>
+                  	</div>
+                    	<div class="col-md-6">
+                  	    </div>
+                  	</div>
+                  	<div class="row">
+                  		<div class="col-md-12">
+                  		<div class="form-group">
+                            <textarea style = "width: 80vw;" class="form-control textarea" rows="25" name="message" id="Message" placeholder="Kindly be as informative as possible to reach out properly to the teacher. This will be sent to the teacher."></textarea>
+                            <input type="checkbox" class = "usephone" id="usephone" name="usephone" value="true" checked>&nbsp;<label for="usephone">Send My Contact Phone Number</label>
+                  		</div>
+                  	</div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12">
+                  <button type="submit" class="btn color-white mwc-orange-background-color pull-right">Send a message</button>
+                  </div>
+                  </div>
+                </form>
+	</div>
+    <div>
+        {% if message_from_server != None %}
+        <div class="d-flex justify-content-center"><p style = "color: green;">{{message_from_server}}</div>
+        {% elif form.errors|length != 0 %}
+            {% for i in form.errors %}
+            <div class="d-flex justify-content-center"><p style = "color: red;">{{form.errors[i]}}</p></div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<script>
+
+$('#contact-form').bootstrapValidator({
+//        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            Name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Name is required and cannot be empty'
+                    }
+                }
+            },
+,
+            Message: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Message is required and cannot be empty'
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+</html>

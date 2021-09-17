@@ -1,0 +1,194 @@
+<html>
+<head>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "height: 7vh;">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/profile/edit">Edit Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/logout">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class = "card p-3 bg-white" >
+        <form style="margin: 0; padding: 0; display: block;">
+        <div class="col-sm-12 mb-3 d-flex justify-content-center">
+            <input type="text" class="form-control" placeholder="Search for names.." name = "username" style = "width: 500;">&nbsp;
+            <select name = "priceperhour" class="form-select form-select-sm d-flex justify-content-center text-center " aria-label=".form-select-sm example" style = "width: 200;">
+                <option value = "all" selected>All</option>
+                <option value = "15$-25$">15$/Hr - 25$/Hr</option>
+                <option value="25$-35$">25$/Hr - 35$/Hr</option>
+                <option value="35$-50$">35$/Hr - 50$/Hr</option>
+                <option value="above 50$">Above 50$/Hr</option>
+            </select>
+            &nbsp;
+            <select name = "time" class="form-select form-select-sm d-flex justify-content-center text-center" aria-label=".form-select-sm example" style = "width: 200;">
+                <option value = "Most Recent" selected>Most Recent</option>
+                <option value="Most Oldest">Most Oldest</option>
+            </select>
+        </div>
+        <div class = "col-sm-12 mb-3 d-flex justify-content-center">
+            <h5 style = "margin-top: 0.5em;">Language: </h5>&nbsp;
+            <select name = "language" class="form-select form-select-sm d-flex justify-content-center text-center" aria-label=".form-select-sm example" style = "width: 200;">
+                <option value="all" selected>All</option>
+                <option value="english">English</option>
+                <option value="korean" >Korean</option>
+                <option value="japanese">Japanese</option>
+                <option value="mandarin" >Mandarin</option>
+                <option value="cantonese">Cantonese</option>
+            </select>
+            &nbsp;
+            <button type="submit" class="btn btn-outline-dark">Submit</button>
+        </div>
+
+        </form>
+    </div>
+
+    {% if search == False %}
+    {% for result in data %}
+        <div class="container mt-5 min-vw-80">
+            <div class="card p-3 bg-white">
+                {% if data[result]['avatar'] == None %}
+                    <div class="about-product text-center mt-2"><a href = "/user/profile/{{ data[result]['id'] }}"><img src="https://gravatar.com/avatar/?s=300&r=g&d=identicon" width="200"></a>
+                {% else %}
+                    <div class="about-product text-center mt-2"><a href = "/user/profile/{{ data[result]['id'] }}"><img src="/user/avatars/{{ data[result]['avatar'] }}" width="200"></a>
+                {% endif %}
+                    <div>
+                        <h4>{{ data[result]["username"] }}</h4>
+                        <h6 class="mt-0 text-black-50">
+                            {{ data[result]["thumbnaildescription"] }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="stats mt-2">
+                    <div class="d-flex justify-content-between"><span>Language: </span><span>{{ data[result]["language"] }}</span></div>
+                    <div class="d-flex justify-content-between"><span>Experience: </span><span>{{ data[result]["experience"] }}</span></div>
+                </div>  
+                <hr>
+                <div class="d-flex justify-content-between total font-weight-bold mt-4"><span>Price Per Hour: </span><span>{{ data[result]["priceperhour"] }} $/Hr</span></div>
+                <div class = "text-center"><a href="/user/profile/{{ data[result]['id'] }}" style = "width: 10vw;" class="btn btn-primary stretched-link">Visit Profile</a></div>
+            </div>
+        </div>
+
+    {% endfor %}
+    <div class="container mt-5 min-vw-80">
+        <div class="card p-3 bg-white">
+                    <h4>No More Results Found!</h4>
+                    <h6 class="mt-0 text-black-50">
+                        Try Searching something! Or <a href = "#">Go Up</a>!
+                    </h6>
+        </div>
+    </div>
+
+    {% elif data|length != 0 and search == True  %} <!--do stuff if user searched and found something-->
+    {% for result in data %}
+        <div class="container mt-5 min-vw-80">
+            <div class="card p-3 bg-white">
+                {% if data[result]['avatar'] == None %}
+                    <div class="about-product text-center mt-2"><a href = "/user/profile/{{ data[result]['id'] }}"></a><img src="https://gravatar.com/avatar/?s=100&r=g&d=identicon" width="100"></a>
+                {% else %}
+                    <div class="about-product text-center mt-2"><a href = "/user/profile/{{ data[result]['id'] }}"></a><img src="/user/avatars/{{ data[result]['avatar'] }}" width="100"></a>
+                {% endif %}
+                    <div>
+                        <h4>{{ data[result]["username"] }}</h4>
+                        <h6 class="mt-0 text-black-50">
+                            {{ data[result]["thumbnaildescription"] }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="stats mt-2">
+                    <div class="d-flex justify-content-between"><span>Language: </span><span>{{ data[result]["language"] }}</span></div>
+                    <div class="d-flex justify-content-between"><span>Experience: </span><span>{{ data[result]["experience"] }}</span></div>
+                </div>  
+                <hr>
+                <div class="d-flex justify-content-between total font-weight-bold mt-4"><span>Price Per Hour: </span><span>{{ data[result]["priceperhour"] }} $/Hr</span></div>
+                <div class = "text-center"><a href="/user/profile/{{ data[result]['id'] }}" style = "width: 10vw;" class="btn btn-primary stretched-link">Visit Profile</a></div>
+            </div>
+        </div>
+    
+    {% endfor %}
+    <div class="container mt-5 min-vw-80">
+        <div class="card p-3 bg-white">
+                    <h4>No More Results Found!</h4>
+                    <h6 class="mt-0 text-black-50">
+                        Try Searching something else. Or go back to the <a href = "/">home</a> page.
+                    </h6>
+        </div>
+    </div>
+
+    {% elif search == True and data|length == 0 %} <!--If you did search but found nothing-->
+
+        <div class="container mt-5 min-vw-80">
+            <div class="card p-3 bg-white">
+                        <h4>No Results Found</h4>
+                        <h6 class="mt-0 text-black-50">
+                            Try Searching something else. Or go back to the <a href = "/">home</a> page.
+                        </h6>
+            </div>
+        </div>
+
+    {% endif %}
+
+</body>
+
+<style>
+body {
+    background: #eee
+}
+
+.ratings i {
+    font-size: 16px;
+    color: red
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h5 {
+    font-weight: 400
+}
+
+.para {
+    font-size: 16px
+}
+a.nounderline {text-decoration: none; color: white;}
+
+a.nounderline:hover {color: grey;}
+
+</style>
+</html>

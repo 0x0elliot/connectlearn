@@ -1,0 +1,8 @@
+.DS_Store
+*.db
+**/__pycache__
+#**/migrations
+*.png
+*.jpeg
+*.jpg
+.env

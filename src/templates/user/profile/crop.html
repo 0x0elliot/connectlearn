@@ -1,0 +1,49 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jcrop-0.9.12@0.9.12/css/jquery.Jcrop.min.css">
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "height: 7vh;">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link active" href="/user/profile/edit">Edit Profile</a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/logout">Sign Out</a>
+                </li>
+    
+            </ul>
+        </div>
+    </nav>
+
+<div class="container mt-5 min-vw-80">
+    <div class="card p-3 bg-white">
+        <div class = "align-items-center">  
+            <center><img class = "align-items-center" src="/user/avatars/{{ current_user.profile_picture_url }}" id="crop-box" style="max-width: 500px; display: block;"></center><br>  <!-- crop window -->
+        </div>
+
+    <form method="post">
+        <input type="hidden" id="x" name="x">
+        <input type="hidden" id="y" name="y">
+        <input type="hidden" id="w" name="w">
+        <input type="hidden" id="h" name="h">
+        <center><input class = "btn" style = "background-color: wheat;" type="submit" value="Crop!"></center>
+    </form>
+    {{ avatars.jcrop_js() }}  <!-- include jcrop javascript -->
+    {{ avatars.init_jcrop() }}  <!-- init jcrop -->
+    </div>
+</div>
+</body>
+
+</html>

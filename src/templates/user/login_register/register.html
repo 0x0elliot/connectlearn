@@ -1,0 +1,121 @@
+<html>
+<head>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style = "height: 7vh;">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/user/register">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5 max-vw-30 container-sm">
+  <div class="card p-3 bg-white">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+    <div class="card-header"><b>Register</b></div>
+    <div class="card-body">
+      <form action = "/user/register" method = "post">
+      <div class="form-group row">
+          <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
+          <div class="col-md-6">
+              <input type="text" class="form-control" name="username" onkeydown="limit(this);" onkeyup="limit(this);" required autofocus>
+          </div>
+      </div>
+
+        <div class="form-group row">
+            <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="email" onkeydown="limit(this);" onkeyup="limit(this);" required autofocus>
+            </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+          <div class="col-md-6">
+              <input type="password" id="password" class="form-control" name="password" onkeydown="limit(this);" onkeyup="limit(this);" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="confirmpassword" class="col-md-4 col-form-label text-md-right">Confirm Password:</label>
+          <div class="col-md-6">
+              <input type="password" id="password" class="form-control" name="confirm_password" onkeydown="limit(this);" onkeyup="limit(this);" required>
+          </div>
+        </div>
+        <div class="col-md-6 offset-md-4">
+        
+        <div class="form-check text-center">
+            <input class="form-check-input" type="radio" name="role" value="teacher">
+            <label class="form-check-label" for="exampleRadios1">
+              Teacher
+            </label>
+            &nbsp;&nbsp;&nbsp;
+            <input class="form-check-input" type="radio" name="role" id="exampleRadios2" value="student">
+            <label class="form-check-label" for="exampleRadios2">
+              Student
+            </label>
+        </div>
+        <br>
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+          </div>
+
+      <script>
+          function limit(element)
+          {
+              var max_chars = 24;
+          
+              if(element.value.length > max_chars) {
+                  element.value = element.value.substr(0, max_chars);
+              }
+          }
+      </script>
+      {% if form.errors|length != 0 %}
+        {% for i in form.errors %}
+            {% if form.errors[i][0] == "Field must be equal to password." %}
+              <div class="d-flex justify-content-center"><p style = "color: red;">*Confirm Password Field Must Be Equal To the Password.</p></div>
+            {% else %}
+              <div class="d-flex justify-content-center"><p style = "color: red;">*{{form.errors[i][0]}}</p></div>
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if message == "User successfully registered!" %}
+        <div class="d-flex justify-content-center"><p style = "color: green;">{{message}}</p></div>
+      {% endif %}
+      {{ form.hidden_tag() }}
+        <!--
+        <a href="/user/register" class="btn btn-link">
+            Forgot Your Password?
+        </a>
+      -->
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+</body>
+
+</html>
