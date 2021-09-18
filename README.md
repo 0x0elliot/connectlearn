@@ -1,4 +1,4 @@
-# Open Source EdTech Student-Teacher Project
+# ConnectLearn
 <img height="36px" src="https://forthebadge.com/images/badges/made-with-python.svg">&nbsp;<img height = "36px" src = "https://forthebadge.com/images/badges/open-source.svg">&nbsp;<img height="26px" src="https://img.shields.io/badge/For-Teachers%20And%20Students-red.svg">
 
 <p>
