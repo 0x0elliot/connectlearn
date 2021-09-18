@@ -7,10 +7,25 @@
 
 ### Deploy
 
+## With Docker
+
 - <code>git clone https://github.com/0x0elliot/connectlearn/</code>
 - <code>cd connectlearn/src </code>
 - Set up <code>src/.env</code> to add your SMTP email and Password.
 - <code>sudo docker-compose up</code>
+
+## Build Locally
+
+- Repeat the first two steps
+
+```bash
+$ pip3 install -r requirements.txt
+$ chmod +x ./src/init_db.sh
+$ ./src/init_db.sh
+
+$ chmod +x ./docker-entrypoint.sh
+$ ./docker-entrypoint.sh
+```
 
 If you don't have docker and docker-compose installed, Try <a href = "https://docs.docker.com/engine/install/ubuntu/">Docker Installation</a> and <code>sudo apt install docker-compose</code>
 
