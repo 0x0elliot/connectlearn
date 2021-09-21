@@ -224,7 +224,7 @@ def setup_profile():
 
 @user.route('/avatars/<path:filename>')
 def get_avatar(filename):
-    if filename[-3:] in ["png", "jpg"] or filename[-4:] == "jpeg":
+    if filename[-4:] in [".png", ".jpg"] or filename[-5:] == ".jpeg":
         return send_from_directory(current_app.config['AVATARS_SAVE_PATH'], secure_filename(filename))
     
     return "Something went wrong. This would be logged and investigated."
