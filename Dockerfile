@@ -18,7 +18,7 @@ RUN apt-get update \
 
 RUN pip3 install -r requirements.txt
 
-#EXPOSE 8000
+EXPOSE 8000
 
 ENV FLASK_APP=src
 
