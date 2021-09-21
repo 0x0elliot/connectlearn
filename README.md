@@ -22,9 +22,9 @@ If you don't have docker and docker-compose installed, Try <a href = "https://do
 
 ```bash
 $ pip3 install -r requirements.txt
+$ export FLASK_APP=src
 $ chmod +x ./src/init_db.sh
 $ ./src/init_db.sh
-
 $ chmod +x ./docker-entrypoint.sh
 $ ./docker-entrypoint.sh
 ```
