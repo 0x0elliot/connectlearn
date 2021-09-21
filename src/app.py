@@ -9,6 +9,7 @@ import secrets
 
 def extensions(app):
     db.init_app(app)
+    db.create_all()
     migrate.init_app(app, db)
     login_manager.init_app(app)
     login_manager.login_view = 'login'
@@ -22,7 +23,15 @@ def create_app():
     BASEDIR = os.path.dirname(os.path.abspath(__file__))
     app.config['AVATARS_SAVE_PATH'] = os.path.join(BASEDIR  , 'avatars')
     avatars.init_app(app)
-    extensions(app)
+    #extensions(app)
+
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+        
+    migrate.init_app(app, db)
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
 
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

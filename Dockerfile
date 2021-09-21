@@ -6,7 +6,6 @@ COPY requirements.txt /opt/connectlearn/
 COPY . /opt/connectlearn
 
 RUN chmod +x /opt/connectlearn/src/init_db.sh
-RUN useradd -ms /bin/bash ubuntu
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
