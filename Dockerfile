@@ -4,7 +4,7 @@ WORKDIR /opt/connectlearn
 COPY requirements.txt /opt/connectlearn/
 
 COPY . /opt/connectlearn
-RUN mkdir /opt/connectlearn/src/avatars
+RUN mkdir /opt/connectlearn/avatars
 CMD ["chmod", "755", "/opt/connectlearn/docker-entrypoint.sh"]
 CMD ["chmod", "755", "/opt/connectlearn/src/init_db.sh"]
 RUN chmod +x /opt/connectlearn/src/init_db.sh
