@@ -13,6 +13,7 @@
 - <code>cd connectlearn/src </code>
 - Set up <code>src/.env</code> to add your SMTP email and Password.
 - <code>sudo docker-compose up</code>
+- Visit port 8000
 
 If you don't have docker and docker-compose installed, Try <a href = "https://docs.docker.com/engine/install/ubuntu/">Docker Installation</a> and <code>sudo apt install docker-compose</code>
 
