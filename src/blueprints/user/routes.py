@@ -11,7 +11,7 @@ from .models import User
 import os
 import sys
 import subprocess
-avatars_in_directory = os.listdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../avatars/")))
+avatars_in_directory = os.listdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../avatars/"))
 
 from src.extension import db, login_manager, avatars, _avatars
 
