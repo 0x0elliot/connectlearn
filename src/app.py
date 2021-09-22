@@ -17,13 +17,19 @@ def create_app():
     app.config['AVATARS_SAVE_PATH'] = os.path.join(BASEDIR  , 'avatars')
     avatars.init_app(app)
     #extensions(app)
-
     db.init_app(app)
     with app.app_context():
         try:
             db.create_all()
         except Exception as e:
             pass
+    
+    app.config['MAIL_SERVER']='smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
+    app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
 
     migrate.init_app(app, db)
     mail.init_app(app)
@@ -32,12 +38,7 @@ def create_app():
 
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['MAIL_SERVER']='smtp.gmail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")
-    app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")
-    app.config['MAIL_USE_TLS'] = False
-    app.config['MAIL_USE_SSL'] = True
+
 
     app.register_blueprint(user)
     app.register_blueprint(contact)
