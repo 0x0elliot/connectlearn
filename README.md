@@ -30,6 +30,10 @@ $ chmod +x ./docker-entrypoint.sh
 $ ./docker-entrypoint.sh
 ```
 
+## Aim:
+
+This project has reached a point where I need to define a proper aim for it. I have noticed that there might be a market for very niché genres and topics that people might want to connect teachers and students better in. I want this project to be a tool they can use for just that! We will try our best to move forward in such a direction that it is more easily customisable and flexible.
+
 ![image](https://user-images.githubusercontent.com/60684641/132923014-5a2ca4a1-e99f-46bd-b8cd-07adaa123653.png)
 
 ## Features:
