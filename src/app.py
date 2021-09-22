@@ -5,7 +5,6 @@ from src.extension import db, login_manager, avatars, mail, migrate
 from src.blueprints.user.routes import user
 from src.blueprints.contact.routes import contact
 from src.blueprints.main.routes import main
-import secrets
 
 
 def create_app():
