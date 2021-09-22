@@ -10,9 +10,8 @@ from threading import Thread
 
 import os
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../"))
 
-from extension import mail,db
+from src.extension import mail,db
 
 contact = Blueprint("contact", __name__, url_prefix = "/contact", template_folder = "../../templates/contact/")
 

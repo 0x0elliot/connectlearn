@@ -152,7 +152,7 @@ def setup_profile():
 
             current_user.price_per_hour = form.price_per_hour.data 
             current_user.thumbnaildescription = form.thumbnaildescription.data
-            current_user.description = form.description.data 
+            current_user.description = form.description.data
 
             if form.years.data >= 0:
                 current_user.years = form.years.data
