@@ -28,7 +28,11 @@ def create_app():
 
     db.init_app(app)
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+        except Exception as e:
+            print(e)
+
         migrate.init_app(app, db)
         mail.init_app(app)
         login_manager.init_app(app)
