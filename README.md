@@ -19,7 +19,7 @@ If you don't have docker and docker-compose installed, Try <a href = "https://do
 
 ### Build Locally
 
-- Repeat the first two steps
+- Repeat the first three steps
 
 ```bash
 $ pip3 install -r requirements.txt
