@@ -18,8 +18,9 @@ from src.extension import db, login_manager, avatars, _avatars
 user = Blueprint('user', __name__, template_folder = "../../templates/user/", url_prefix = "/user")
 
 @login_manager.unauthorized_handler 
-def unauthorized_callback(): 
-       return redirect("/user/login") 
+def unauthorized_callback():
+    print("unauthenticated")
+    return redirect("/user/login") 
 
 @user.route('/login', methods = ["GET", "POST"])
 def user_login():
@@ -29,22 +30,19 @@ def user_login():
         user_obj = User.query.filter_by(username=form.username.data).first()
         if user_obj:
             if check_password_hash(user_obj.password, form.password.data):
-                if current_user.is_authenticated:
-                    logout_user()
+                print("authenticating")
                 login_user(user_obj, remember=form.remember.data)
 
                 if user_obj.role == "teacher":
                     if user_obj.profile_setup_status == False:
-                        print(user_obj.profile_setup_status)
                         return redirect('/user/profile/edit')
 
-                    return redirect('/')#return render_template("login_register/login.html", message = "<script>window.location.replace('/user/profile');</script>")
+                    return redirect('/')
                     
                 elif user_obj.role == "student":
                     if user_obj.profile_setup_status == False:
                         return redirect('/user/profile/edit')
-                    return redirect('/')#return render_template("login_register/login.html", message = "<script>window.location.replace('/user/profile');</script>")
-        
+                    return redirect('/')
             else:
                 return render_template('login_register/login.html', message = "Invalid Username/Password", form = form)
         
@@ -65,6 +63,7 @@ def user_register():
                     hashed_password = generate_password_hash(form.password.data, method='sha256') #shift to bcrypt
                     if current_user.is_authenticated:
                         logout_user()
+
                     new_user = User(username=form.username.data, email=form.email.data, password=hashed_password, role = form.role.data, name = form.username.data, account_made_on = int(time.time()))
                     db.session.add(new_user)
                     db.session.commit()
@@ -134,7 +133,7 @@ def setup_profile():
             korean_selected = korean_selected,
             japanese_selected = japanese_selected,
             mandarin_selected = mandarin_selected,
-            cantonese_selected = cantonese_selected)
+            cantonese_selected = cantonese_selected,)
         
         return render_template('profile/studenteditprofile.html', form = form,  language = current_user.language, username = current_user.username, email = current_user.email, phone = current_user.phone,
             english_selected = english_selected,
@@ -150,8 +149,6 @@ def setup_profile():
 
         if form.validate_on_submit():
 
-            all_arguments = list(request.form.keys())
-            platforms_ = all_arguments
 
             current_user.price_per_hour = form.price_per_hour.data 
             current_user.thumbnaildescription = form.thumbnaildescription.data
@@ -159,7 +156,6 @@ def setup_profile():
 
             if form.years.data >= 0:
                 current_user.years = form.years.data
-                #throw an error if this condition isn't true
 
             if form.language.data in ["english", "korean", "japanese", "mandarin", "cantonese"]:
                 current_user.language = form.language.data

@@ -6,7 +6,7 @@ from src.blueprints.user.routes import user
 from src.blueprints.contact.routes import contact
 from src.blueprints.main.routes import main
 import secrets
-
+"""
 def extensions(app):
     db.init_app(app)
     db.create_all()
@@ -15,10 +15,11 @@ def extensions(app):
     login_manager.login_view = 'login'
 
     return None
+"""
 
 def create_app():
     app = Flask(__name__, template_folder='templates')
-    app.config['SECRET_KEY'] = secrets.token_hex(42)
+    app.config['SECRET_KEY'] = 'secretdevkey'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
     BASEDIR = os.path.dirname(os.path.abspath(__file__))
     app.config['AVATARS_SAVE_PATH'] = os.path.join(BASEDIR  , 'avatars')
@@ -28,10 +29,10 @@ def create_app():
     db.init_app(app)
     with app.app_context():
         db.create_all()
-        
-    migrate.init_app(app, db)
-    login_manager.init_app(app)
-    login_manager.login_view = 'login'
+        migrate.init_app(app, db)
+        mail.init_app(app)
+        login_manager.init_app(app)
+        login_manager.login_view = 'login'
 
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -45,7 +46,6 @@ def create_app():
     app.register_blueprint(user)
     app.register_blueprint(contact)
     app.register_blueprint(main)
-    mail.init_app(app)
 
     return app
 

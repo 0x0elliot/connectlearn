@@ -53,9 +53,18 @@
                 </button>
             </div>
         {% if message != "Fill the form to login" %}
-            <div class="d-flex justify-content-center"><p style = "color: red;">*{{message}}</p></div>
+        <div class="d-flex justify-content-center"><p style = "color: red;">*{{message}}</p></div>
         {% endif %}
-            
+
+        {% if form.errors|length != 0 %}
+        {% for i in form.errors %}
+            {% if i == "password" %}
+            <div class="d-flex justify-content-center"><p style = "color: red;">{{form.errors[i][0]}}</p></div>
+            {% else %}
+            <div class="d-flex justify-content-center"><p style = "color: red;">*{{i}} : {{form.errors[i][0]}}</p></div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}    
         <!--
         <a href="/user/register" class="btn btn-link">
             Forgot Your Password?
