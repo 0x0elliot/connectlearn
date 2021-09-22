@@ -13,7 +13,7 @@
 - <code>cd connectlearn/src </code> and definitely change <a href = "https://github.com/0x0elliot/connectlearn/blob/75044a17fe8d9dc9c84f7b24b0a68a9c101c3c05/src/app.py#L22">Secret key's</a> value to something random before putting it to production!
 - Set up <code>src/.env</code> to add your SMTP email and Password.
 - <code>sudo docker-compose up</code>
-- Visit port 8000
+- Visit <a href = "http://0.0.0.0:8000/">0.0.0.0:8000</a> on your browser.
 
 If you don't have docker and docker-compose installed, Try <a href = "https://docs.docker.com/engine/install/ubuntu/">Docker Installation</a> and <code>sudo apt install docker-compose</code>
 
@@ -29,6 +29,7 @@ $ ./src/init_db.sh
 $ chmod +x ./docker-entrypoint.sh
 $ ./docker-entrypoint.sh
 ```
+- Visit <a href = "http://0.0.0.0:8000/">0.0.0.0:8000</a> on your browser.
 
 ## Aim:
 
