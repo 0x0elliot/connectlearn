@@ -10,7 +10,7 @@
 ### With Docker
 
 - <code>git clone https://github.com/0x0elliot/connectlearn/</code>
-- <code>cd connectlearn/src </code>
+- <code>cd connectlearn/src </code> and definitely change <a href = "https://github.com/0x0elliot/connectlearn/blob/75044a17fe8d9dc9c84f7b24b0a68a9c101c3c05/src/app.py#L22">Secret key's</a> value to something random before putting it to production!
 - Set up <code>src/.env</code> to add your SMTP email and Password.
 - <code>sudo docker-compose up</code>
 - Visit port 8000
