@@ -135,7 +135,7 @@ def setup_profile():
             mandarin_selected = mandarin_selected,
             cantonese_selected = cantonese_selected,)
         
-        return render_template('profile/studenteditprofile.html', form = form,  language = current_user.language, username = current_user.username, email = current_user.email, phone = current_user.phone,
+        return render_template('profile/studenteditprofile.html', form = form,  name = current_user.name, language = current_user.language, username = current_user.username, email = current_user.email, phone = current_user.phone,
             english_selected = english_selected,
             korean_selected = korean_selected,
             japanese_selected = japanese_selected,
