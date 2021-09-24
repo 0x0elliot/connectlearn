@@ -38,7 +38,6 @@ def create_app():
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
     app.register_blueprint(user)
     app.register_blueprint(contact)
     app.register_blueprint(main)

@@ -1,21 +1,18 @@
 import time
-from datetime import datetime
-from flask import Blueprint, render_template, request, current_app, abort, redirect
+from flask import Blueprint, render_template, abort
 from flask_login import current_user, login_required
-from flask_mail import Message
-from wtforms.validators import Email
 from .forms import contact_form
 from ..user.models import User, EmailsMade
-from threading import Thread
 
 import os
 import sys
 
 from src.extension import mail,db
+from .utils import FlaskThread, send_email
 
 contact = Blueprint("contact", __name__, url_prefix = "/contact", template_folder = "../../templates/contact/")
 
-
+"""
 class FlaskThread(Thread):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -39,7 +36,7 @@ def send_email(title, message_to_send, sender, email, emailbyuserid, emailtouser
     db.session.commit()
 
 #add last two functions in utils.py
-
+"""
 #rate limit endpoint by saving in a db the number of requests made by account and then limit accordingly
 @contact.route('/<id>', methods = ["GET", "POST"])
 @login_required
@@ -56,12 +53,13 @@ def reach_out(id):
         emailsmade = EmailsMade.query.filter_by(emailbyuserid = current_user.id)
         if emailsmade.first():
             for i in emailsmade: # continue here
-                unixtime_then = int(i.unixtime) #unix time stamp of the time the email was sent
-                unixtime_now =  int(time.time()) #unix time stamp of now
+                if i.emailtouserid == user.id:
+                    unixtime_then = int(i.unixtime) #unix time stamp of the time the email was sent
+                    unixtime_now =  int(time.time()) #unix time stamp of now
 
-                time_difference = int((unixtime_now - unixtime_then)/(60*60*24)) #number of days that has passed since last contact
-                if time_difference == 0:
-                    return render_template("contact.html", form = form, message_from_server = "You have already tried reaching this person today. Try again tomorrow.")
+                    time_difference = int((unixtime_now - unixtime_then)/(60*60*24)) #number of days that has passed since last contact
+                    if time_difference == 0:
+                        return render_template("contact.html", form = form, message_from_server = "You have already tried reaching this person today. Try again tomorrow.")
         
 
         title_suffix = " scheduled a class with you!"
