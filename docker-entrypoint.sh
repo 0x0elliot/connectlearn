@@ -5,7 +5,7 @@ port="8000"
 
 if [[ "$environment" == "netlify" ]]; then
 	echo "Deployed on netlify"
-	port="443"
+	port="80"
 fi
 
 echo "$port"
