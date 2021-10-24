@@ -14,7 +14,7 @@
 - Set up <code>src/.env</code> to add your SMTP email and Password.
 - <code>sudo docker-compose up</code>
 - Visit <a href = "http://0.0.0.0:8000/">0.0.0.0:8000</a> on your browser.
-
+`
 If you don't have docker and docker-compose installed, Try <a href = "https://docs.docker.com/engine/install/ubuntu/">Docker Installation</a> and <code>sudo apt install docker-compose</code>
 
 ### Build Locally
@@ -44,6 +44,10 @@ This project has reached a point where I need to define a proper aim for it. I h
 
 - <b>User Profile Management Along with Profile Picture Uploading Functionality For Teachers + Image Cropping</b>
 ![image](https://user-images.githubusercontent.com/60684641/132923312-db66b230-d96f-4d4e-a400-3561ef617516.png)
+
+- <b>Here is how the image cropping looks like</b>
+![image](https://user-images.githubusercontent.com/60684641/138584064-dbfc407c-f981-48ac-b236-a0094dedde2d.png)
+
 
 - <b>Main page where students can search for teachers accordingly and filter them by Cost, Language, Most Recent/Oldest, Username, Teacher Description etc.</b>
 ![image](https://user-images.githubusercontent.com/60684641/132923459-f5ad155d-23ea-48c3-8c22-2682544190a0.png)
